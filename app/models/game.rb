@@ -68,24 +68,45 @@ class Game < ApplicationRecord
   end
 
   def play
-    puts "#{current_player.name} has randomly been selected as the first player"
-    self.update_attribute(:status, STATUS[:started])
-    good_play = true
-    while good_play
-      board.draw_grid
-      puts ""
-      puts solicit_move
-      col = get_move
-      good_play = board.add_to_col(col, current_player.color)
-      message = board.game_over_message
-      if message
-        puts message
-        self.update_attribute(:status, STATUS[:ended])
+    ActiveRecord::Base.logger.silence do
+      puts "#{current_player.name} has randomly been selected as the first player"
+      self.update_attribute(:status, STATUS[:started])
+      good_play = true
+      while good_play
+        clear_screen
+        draw_players
         board.draw_grid
-        return
-      else
-        switch_players
+        puts ""
+        puts solicit_move
+        col = get_move
+        good_play = board.add_to_col(col, current_player.color)
+        message = board.game_over_message
+        if message
+          puts message
+          self.update_attribute(:status, STATUS[:ended])
+          draw_players
+          board.draw_grid
+          return
+        else
+          switch_players
+        end
+        clear_screen
       end
     end
+  end
+
+  private
+
+  def draw_players
+    puts "*" * self.board.width * 3
+    puts "Connect4 on Rails"
+    puts "-" * self.board.width * 3
+    puts "Players:"
+    puts "X = #{self.players.where(color: 'X').first.name}"
+    puts "O = #{self.players.where(color: 'O').first.name}"
+  end
+
+  def clear_screen
+    40.times { puts }
   end
 end

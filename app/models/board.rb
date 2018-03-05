@@ -65,13 +65,17 @@ class Board < ApplicationRecord
   def console_grid
     rows = []
     (1..self.height).to_a.each do |h|
-      rows << row(h).map { |cell| "[#{cell.value.empty? ? "_" : cell.value}]" }.join(" ")
+      rows << row(h).map { |cell| "[#{cell.value.empty? ? "_" : cell.value}]" }.join("")
     end
     rows
   end
 
   def draw_grid
+    puts "*" * self.width * 3
+    label = (1..self.width).map { |n| "(#{n})" }.join("")
+    puts label
     puts console_grid.reverse.join("\n")
+    puts "*" * self.width * 3
   end
 
   def add_to_col(col, value)
@@ -109,7 +113,7 @@ class Board < ApplicationRecord
 
   def match_win_patterns(x, y)
     WINNING_RULES.keys.each do |key|
-      puts "Testing for win in #{key} and pattern is #{WINNING_RULES[key]}"
+      Rails.logger.debug "Testing for win in #{key} and pattern is #{WINNING_RULES[key]}"
       result = match_pattern(WINNING_RULES[key], x, y)
       return result if result[0].present?
     end
