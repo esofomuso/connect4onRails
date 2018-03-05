@@ -1,6 +1,8 @@
 # A simple Connect 4 game on Rails
 
-Curruntly can play in Rails console using : Board.play_in_console
+Curruntly can play 
+- In console  `rails game:human_vs_human`
+- In Rails console  `Board.play_in_console`
 
 ## Ruby version
 
@@ -22,7 +24,6 @@ rails db:migrate
 ## Still to do 
 
 Web Version
-Make it Run outside of Rails console
 Include a simple AI to play Human Vs. Computer
 
 * How to run the test suite

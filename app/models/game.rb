@@ -40,7 +40,7 @@ class Game < ApplicationRecord
 
   def players_names_from_console
     puts "Please enter two comma-separated names for players X,O :"
-    hm = gets.chomp
+    hm = STDIN.gets.chomp
     puts "You entered #{hm}"
     ps = hm.split(',')
     puts "player X = #{ps[0]} and player O = #{ps[1]}"
@@ -63,8 +63,18 @@ class Game < ApplicationRecord
     set_current_player(players.without(current_player).first)
   end
 
-  def get_move(human_move = gets.chomp)
+  def get_move(human_move = STDIN.gets.chomp)
     human_move.to_i
+  end
+
+  def game_over_message
+    over = board.game_over
+    return nil unless over
+    if over[:winner]
+      winner = players.find_by_color(over[:winner].first).name rescue over[:winner].first
+      return "#{winner} won! Winning coordinates #{over[:winner].last}"
+    end
+    return over[:tie] if over[:tie]
   end
 
   def play
@@ -80,7 +90,7 @@ class Game < ApplicationRecord
         puts solicit_move
         col = get_move
         good_play = board.add_to_col(col, current_player.color)
-        message = board.game_over_message
+        message = game_over_message
         if message
           puts message
           self.update_attribute(:status, STATUS[:ended])

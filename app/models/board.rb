@@ -86,10 +86,10 @@ class Board < ApplicationRecord
     end
   end
 
-  def game_over_message
+  def game_over
     winner, coords = detect_win
-    return "#{winner} won! Winning coordinates #{coords}" if winner
-    return "The game ended in a tie" if tie?
+    return {winner: [winner, coords]} if winner
+    return {tie: "The game ended in a tie"} if tie?
     false
   end
 
@@ -134,13 +134,11 @@ class Board < ApplicationRecord
       end
     end
     if player_colors.none_empty? && player_colors.all_same?
-      [Player.find_by_color(player_colors.first).name, coords]
+      [player_colors.first, coords]
     else
       [nil, nil]
     end
   end
-
-  private
 
   def create_cells
     (0..self.width - 1).to_a.each do |x|
@@ -149,6 +147,8 @@ class Board < ApplicationRecord
       end
     end
   end
+
+  private
 
   def occupied_cells_by_col(col)
     column(col).where("value IS NOT ''")
