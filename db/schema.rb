@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(version: 20180304201359) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.integer "current_player"
-    t.integer "string"
+    t.integer "current_player_id"
+    t.integer "status"
     t.integer "board_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

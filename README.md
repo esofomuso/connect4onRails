@@ -23,7 +23,6 @@ rails db:migrate
 
 ## Still to do 
 
-Web Version
 Include a simple AI to play Human Vs. Computer
 
 * How to run the test suite
@@ -35,8 +34,10 @@ Include a simple AI to play Human Vs. Computer
 - Level 2: Implement a standard “AI” for the computer player.  A standard computer opponent should block a human from winning when able to, but plays more ad hoc and does not operate with an advanced strategy.
 - Level 3:  Make it playable online (Heroku or similar) with a SPA web interface, games persisting to a database,  etc.
 
-##Inspired by:
-[Tic Tac Toe on Rails] (https://github.com/MrPowers/tic_tac_toe)
-[Connect Four on Rails] (https://github.com/buwilliams/connect-four)
+## Inspired by:
+
+[Tic Tac Toe on Rails](https://github.com/MrPowers/tic_tac_toe)
+
+[Connect Four on Rails](https://github.com/buwilliams/connect-four)
 
 
