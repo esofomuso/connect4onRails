@@ -1,6 +1,6 @@
 class BoardController < ApplicationController
   expose(:board) { params[:id] ? Board.find_by_id(params[:id]) : Board.establish } #{ @board || game.board }
-  expose(:game) { @game || Game.find_by_id(params[:game_id]) }
+  expose(:game) { @game || Game.find_by_id_and_board_id(params[:game_id], board.id) }
   expose(:current_player) { game.current_player unless game.blank? }
   expose(:next_player) { curent_game.next_player }
   expose(:grid) { board.grid }
@@ -16,6 +16,7 @@ class BoardController < ApplicationController
   end
 
   def show
+    redirect_to "/" and return if game.blank?
     @message = message || flash[:message]
   end
 
