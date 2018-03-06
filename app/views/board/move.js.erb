@@ -1,0 +1,5 @@
+$("#message").html('<%= @message %>');
+$("#notice").html("<%= @notice %>");
+$("#yellow_player").html("<%= game.yellow_player %>");
+$("#red_player").html("<%= game.red_player %>");
+$("#grid").replaceWith('<%= j render("grid") %>');
