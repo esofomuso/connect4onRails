@@ -32,9 +32,6 @@ Levels 1 and 3 done, but no AI yet.
 
 Include a simple AI to play Human Vs. Computer
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
 
 ## Inspired by:
 
