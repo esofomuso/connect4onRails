@@ -2,7 +2,9 @@ class Cell < ApplicationRecord
   belongs_to :board
   belongs_to :player, optional: true
 
-  def self.by_cordinates(coords)
+  validates_presence_of :x, :y
+
+  def self.by_coordinates(coords)
     Cell.where(x: coords[0], y: coords[1])
   end
 
