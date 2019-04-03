@@ -46,14 +46,20 @@ module ConnectFour
 
   # To use in the console
   def console_grid
-    grid.map { |row| row.map { |cell| "[#{cell.value.empty? ? "_" : cell.value}]" }.join("") }
+    i = self.height
+    grid.map do |row|
+      puts row.map { |cell| "[#{cell.value.empty? ? "_" : cell.value}]" }.join("") + " #{i}"
+      i-=1
+    end
   end
+
+  
 
   def draw_grid
     puts "*" * self.width * 3
     label = (1..self.width).map { |n| "(#{n})" }.join("")
     puts label
-    puts console_grid.join("\n")
+    console_grid
     puts "*" * self.width * 3
   end
 
@@ -65,9 +71,13 @@ module ConnectFour
     end
   end
 
+  def add_one(arr)
+    return arr.map!{|e| e.is_a?(Integer) ? e + 1 : e} unless arr.blank?
+  end
+
   def game_over
     winner, coords = detect_win
-    return {winner: [winner, coords]} if winner
+    return {winner: [winner, coords.map!{|e| add_one(e)}]} if winner
     return {tie: "The game ended in a tie"} if tie?
     false
   end

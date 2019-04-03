@@ -76,7 +76,7 @@ form {
 table {
     text-align: center;
     justify-content: center;
-    border-style: inset;
+    //border-style: inset;
     border-color: olive;
     display: inline-table;
     tr {
@@ -87,7 +87,7 @@ table {
             font-weight: bold;
             color: olive;
             width: 50px;
-            height: 50px;
+            height: 40px;
             z-index: -1;
             opacity: 1;
             #reset_button {
@@ -102,33 +102,42 @@ table {
             padding: 4px;
             text-decoration: none;
             color: olive;
-            font-size: 20px;
+            font-size: 15px;
             vertical-align: center;
             align-content: center;
         }
 
+        td#row {
+            border-left-style: inset;
+            border: 2px inset #efecc0;
+            font-weight: bold;
+            color: olive;
+            width: 5px;
+            height: 50px;
+        }
         
         td#cell {
             border-style: groove;
             width: 50px;
-            height: 50px;
+            height: 67px;
         }
         td#cell.O {
-             //background-color: yellow;
              background: url("/assets/red2.jpeg") no-repeat;
              background-size:contain;
+             background-position: center; 
+             background-size: 65px 65px;
              color: red;
              text-transform: uppercase;
              font-weight: bold;
         }
         td#cell.X {
-            //background-color: yellow;
             background: url("/assets/yellow.png") no-repeat;
             background-size:contain;
+            background-position: center; 
+            background-size: 70px 70px;
             color: yellow;
             text-transform: uppercase;
             font-weight: bold;
-            // font-size: 20px;
         } //}
     }
 }
